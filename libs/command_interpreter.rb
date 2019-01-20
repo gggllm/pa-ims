@@ -7,7 +7,7 @@ class CommandInterpreter
 =end
   def self.interpret input
     input = input.strip.lstrip.downcase
-    input_array = input.split(' ')
+    input_array = input.split(/\s+/)
     case input_array[0]
     when 'help'
       return ['help']
@@ -18,15 +18,18 @@ class CommandInterpreter
         return ['info']
       else
         command = "info #{input_array[1]}"
-        arguments = input.split(' by ')
-        track = arguments[0][command.length..-1]
-        artist = arguments[1]
+        case input_array[1]
+        when "artist"
+          artist = input[0][command.length + 1..-1]
+        when "track"
+          track = input[0][command.length + 1..-1]
+        end
         return command, track, artist
       end
     when 'add'
       command = "add #{input_array[1]}"
       arguments = input.split(' by ')
-      track = arguments[0][command.length..-1]
+      track = arguments[0][command.length + 1..-1]
       artist = arguments[1]
       raise 'no track arguments' if track.nil?
       return command, track, artist
