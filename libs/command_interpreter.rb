@@ -1,10 +1,6 @@
-=begin
-  this class offers some static methods to deal with user input
-=end
+  #this class offers some static methods to deal with user input
 class CommandInterpreter
-=begin
-  this method will return an array =[command, track, artist]
-=end
+  #this method will return an array =[command, track, artist]
   def self.interpret input
     input = input.strip.lstrip.downcase
     input_array = input.split(/\s+/)
@@ -20,17 +16,17 @@ class CommandInterpreter
         command = "info #{input_array[1]}"
         case input_array[1]
         when "artist"
-          artist = input[0][command.length + 1..-1]
+          artist = input[command.length + 1..-1]
         when "track"
-          track = input[0][command.length + 1..-1]
+          track = input[command.length + 1..-1]
         end
         return command, track, artist
       end
     when 'add'
       command = "add #{input_array[1]}"
-      arguments = input.split(' by ')
+      arguments = input.split(/\s+by\s+/)
       track = arguments[0][command.length + 1..-1]
-      artist = arguments[1]
+      artist = arguments[1] || arguments[0][command.length + 1..-1]
       raise 'no track arguments' if track.nil?
       return command, track, artist
     when 'play'
@@ -38,9 +34,9 @@ class CommandInterpreter
       raise 'no track arguments' if track.nil?
       return 'play track', track
     when 'count'
-      return 'count tracks', '', input.split(' by ')[1]
+      return 'count tracks', '', input.split(/\s+by\s+/)[1]
     when 'list'
-      return 'list tracks', '', input.split(' by ')[1]
+      return 'list tracks', '', input.split(/\s+by\s+/)[1]
     else
       raise 'no matched command'
     end

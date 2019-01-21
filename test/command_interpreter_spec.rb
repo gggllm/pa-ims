@@ -31,5 +31,29 @@ describe CommandInterpreter do
     assert_equal "something", output[2]
   end
 
+  it 'interpret count tracks' do
+    output = CommandInterpreter.interpret("count tracks by something")
+    assert_equal "count tracks", output[0]
+    assert_equal "something", output[2]
+  end
+
+  it 'interpret list tracks' do
+    output = CommandInterpreter.interpret("list tracks by something")
+    assert_equal "list tracks", output[0]
+    assert_equal "something", output[2]
+  end
+
+  it 'interpret add track' do
+    output = CommandInterpreter.interpret("add track something1 by something2")
+    assert_equal "add track", output[0]
+    assert_equal "something1", output[1]
+    assert_equal "something2", output[2]
+  end
+
+  it 'interpret add artist' do
+    output = CommandInterpreter.interpret("add artist something")
+    assert_equal "add artist", output[0]
+    assert_equal "something", output[2]
+  end
 
 end

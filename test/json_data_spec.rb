@@ -1,11 +1,18 @@
 require 'minitest/spec'
 require 'minitest/autorun'
-require_relative '../methods'
+require_relative '../libs/json_data'
 
 
-describe Methods do
-  it 'can be created with p and r' do
-    circle.must_be_instance_of Circle
+describe JSONData do
+  it 'can initialize' do
+    JSONData.new('unit_test').must_be_instance_of JSONData
+  end
+
+  it 'can set and get' do
+    data = JSONData.new('unit_test')
+    data.set(:test, [12345, "56789"])
+    assert_equal([12345, "56789"], data.get(:test))
+
   end
 
 end
