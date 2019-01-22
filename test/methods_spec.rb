@@ -6,7 +6,7 @@ require_relative '../methods'
 describe Methods do
 
   it 'execute play' do
-    Methods.play ("something")
+    Methods.play "something"
   end
 
   it 'execute info track' do

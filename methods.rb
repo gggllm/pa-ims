@@ -10,7 +10,7 @@ module Methods
 
 
   def self.add_artist name
-    artists = (@artists.get :data )|| []
+    artists = (@artists.get :data) || []
     target = artists.find {|x| x.name == name}
     if target.nil?
       id = name.split(' ').map {|x| x[0]}.join('')
@@ -24,15 +24,23 @@ module Methods
       return
     end
     artist = Artist.new(name, id)
-    artists.push artist
+    artists << artist
     @artists.set :data, artists
     return "artist is successfully added, id is #{id}"
   end
 
   def self.info
     list = (@play_lists.get :data) || []
+    tracks = (@tracks.get :data) || []
+    artists = (@artists.get :Data) || []
     output = []
-
+    output << "three recently played music:"
+    output << list.reverse.take(3)
+                  .each_with_index.
+        map {|play_list, index| "#{index + 1}. #{tracks[play_list.track_number.to_i].track_name}"}
+    output << "total number of tracks added: #{tracks.length}"
+    output << "total number of artists added: #{artists.length}"
+    output.join("\n")
   end
 
   def self.info_track track
@@ -48,7 +56,7 @@ module Methods
 
   def self.add_track track, artist
     tracks = (@tracks.get :data) || []
-    tracks.push Track.new(track, artist)
+    tracks << Track.new(track, artist)
     @tracks.set :data, tracks
     "You have succeessfully added track #{track} by #{artist}"
   end
@@ -65,7 +73,7 @@ module Methods
 
   def self.play track
     list = (@play_lists.get :data) || []
-    list.push(PlayList.new(track))
+    list << (PlayList.new(track))
     @play_lists.set :data, list
     return "you have played track #{track}"
   end
@@ -78,6 +86,12 @@ module Methods
     else
       return "artist with id#{artist}, name is #{target.name}"
     end
+  end
+
+  def self.clear
+    @tracks.set :data, []
+    @artists.set :data, []
+    @play_lists.set :data, []
   end
 
   private
