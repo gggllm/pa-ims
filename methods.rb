@@ -19,7 +19,7 @@ module Methods
       temp = id
       index = 2
       until artists.find {|x| x.id == id}.nil?
-        id = temp + index
+        id = temp + index.to_s
         index += 1
       end
     else
@@ -56,11 +56,16 @@ module Methods
     end
   end
 
-  def self.add_track track, artist
+  def self.add_track track, artist_id
     tracks = (@tracks.get :data) || []
-    tracks << Track.new(track, artist)
+    artists = (@artists.get :data) || []
+    artist = artists.find {|x| x.id == artist_id}
+    if artist.nil?
+      return "cannot find artist with id #{artist_id}"
+    end
+    tracks << Track.new(track, artist.name)
     @tracks.set :data, tracks
-    "You have succeessfully added track #{track} by #{artist}"
+    "You have succeessfully added track #{track} by #{artist.name}"
   end
 
   def self.count_tracks artist
@@ -107,5 +112,6 @@ module Methods
              else
                tracks.select {|track| track.artist_name == artist.name}
              end
+    tracks
   end
 end
