@@ -33,4 +33,9 @@ describe Methods do
     Methods.add_artist "something"
   end
 
+  it 'cannot add artist with strange id' do
+    artist_id = "very strange stuff"
+    assert_equal "cannot find artist with id #{artist_id}", Methods.add_track("something", artist_id)
+  end
+
 end
