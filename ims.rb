@@ -2,7 +2,7 @@ require './libs/command_interpreter'
 require './libs/storage'
 require './methods'
 loop do
-
+  print"> "
   input = gets.chomp
   begin
     command, track, artist = CommandInterpreter.interpret input
