@@ -37,9 +37,9 @@ module Methods
     artists = (@artists.get :data) || []
     output = []
     output << "three recently played music:"
-    output << list.reverse.take(3)
+    output << list[-3..-1]
                   .each_with_index.
-        map {|play_list, index| "#{index + 1}. #{tracks[play_list.track_number.to_i].track_name}"}
+        map {|play_list, index| "#{index + 1}. #{tracks[play_list.track_number.to_i-1].track_name}"}
     output << "total number of tracks added: #{tracks.length}"
     output << "total number of artists added: #{artists.length}"
     output.join("\n")
@@ -47,8 +47,8 @@ module Methods
 
   def self.info_track track
     tracks = (@tracks.get :data) || []
-    track = track.to_i
-    if track > tracks.length
+    track = track.to_i-1
+    if track >= tracks.length
       return "cannot find this track"
     else
       track = tracks[track]
@@ -65,7 +65,7 @@ module Methods
     end
     tracks << Track.new(track, artist.name)
     @tracks.set :data, tracks
-    "You have succeessfully added track #{track} by #{artist.name}"
+    "You have successfully added track #{track} by #{artist.name}, track number is #{tracks.length}"
   end
 
   def self.count_tracks artist
@@ -78,11 +78,19 @@ module Methods
     tracks.each_with_index.map {|track, index| "#{index + 1}. \"#{track.track_name}\" by #{track.artist_name}"}
   end
 
-  def self.play track
-    list = (@play_lists.get :data) || []
-    list << (PlayList.new(track))
-    @play_lists.set :data, list
-    return "you have played track #{track}"
+  def self.play track_number
+    tracks = (@tracks.get :data) || []
+    track_number = track_number.to_i-1
+    if track_number >= tracks.length
+      return "cannot find this track"
+    else
+      track = tracks[track_number]
+      list = (@play_lists.get :data) || []
+      list << (PlayList.new(track_number+1))
+      @play_lists.set :data, list
+      return "you have played track #{track.track_name}"
+    end
+
   end
 
   def self.info_artist artist
@@ -91,7 +99,7 @@ module Methods
     if target.nil?
       return "cannot find artist with id #{artist}"
     else
-      return "artist with id#{artist}, name is #{target.name}"
+      return "artist with id: #{artist}, name is #{target.name}"
     end
   end
 
@@ -106,7 +114,7 @@ module Methods
   def self.get_tracks_array_by_artist(artist)
     tracks = (@tracks.get :data) || []
     artists = (@artists.get :data) || []
-    artist = artists.find {|x| x.name == artist}
+    artist = artists.find {|x| x.id == artist}
     tracks = if artist.nil?
                []
              else

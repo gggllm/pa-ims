@@ -42,7 +42,7 @@ loop do
   when 'add track'
     puts Methods.add_track track, artist
   when 'play track'
-    Methods.play track
+    puts Methods.play track
   when 'count tracks'
     puts Methods.count_tracks artist
   when 'list tracks'

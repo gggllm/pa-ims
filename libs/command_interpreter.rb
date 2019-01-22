@@ -30,7 +30,7 @@ class CommandInterpreter
       raise 'no track arguments' if track.nil?
       return command, track, artist
     when 'play'
-      track = input[5..-1]
+      track = input[11..-1]
       raise 'no track arguments' if track.nil?
       return 'play track', track
     when 'count'

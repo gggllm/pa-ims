@@ -15,3 +15,48 @@ total number of artists added: 0
   8.Play Track - Record that an existing track was played at the current time, e.g. play track 13.
   9.Count tracks - Display how many tracks are known by a certain artist, e.g. count tracks by jo
   10.List tracks - Display the tracks played by a certain artist, e.g. list tracks by jo
+
+> exit
+user choose to exit.
+
+> add artist lady gaga
+artist is successfully added, id is lg
+> add artist lady gold
+artist is successfully added, id is lg2
+
+> info artist lg
+artist with id: lg, name is lady gaga
+> info artist lg2
+artist with id: lg2, name is lady gold
+
+>add track bad romance by lg
+You have successfully added track bad romance by lady gaga, track number is 1
+> info track 1
+track name is bad romance, artist name is lady gaga
+> count tracks by lg
+there is 1 tracks in your collection
+> list tracks by lg
+1. "bad romance" by lady gaga
+> add track haha by lg
+You have successfully added track haha by lady gaga, track number is 2
+> list tracks by lg
+1. "bad romance" by lady gaga
+2. "haha" by lady gaga
+> play track 1
+you have played track bad romance
+> play track 2
+you have played track haha
+> play track 1
+you have played track bad romance
+> play track 2
+you have played track haha
+> info
+three recently played music:
+1. haha
+2. bad romance
+3. haha
+total number of tracks added: 2
+total number of artists added: 2
+
+> info track 1
+track name is bad romance, artist name is lady gaga
