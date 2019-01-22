@@ -2,18 +2,21 @@ require './libs/command_interpreter'
 require './libs/storage'
 require './methods'
 loop do
-  print"> "
+  print '> '
   input = gets.chomp
   begin
     # user a interpreter to handle input string for easy testing
     # also return an array as result
     command, track, artist = CommandInterpreter.interpret input
   rescue
-    puts "input command doesn't have the right arguments"
+    puts "input command doesn't exist or have the right arguments
+      enter help for more information about IMS"
+    next
   end
 
   case command
   when 'exit'
+    puts 'user choose to exit.'
     exit(0)
   when 'help'
     puts '
@@ -39,11 +42,12 @@ loop do
   when 'add track'
     puts Methods.add_track track, artist
   when 'play track'
+    Methods.play track
   when 'count tracks'
     puts Methods.count_tracks artist
   when 'list tracks'
     puts Methods.list_tracks artist
   else
-    puts 'undefined command, press help for more information about IMS'
+    puts 'undefined command, enter help for more information about IMS'
   end
 end
