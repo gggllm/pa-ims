@@ -6,7 +6,8 @@ require_relative '../methods'
 describe Methods do
 
   it 'execute play' do
-    Methods.play "something"
+    track_name="track_name"
+    assert_equal "you have played track #{track_name}",Methods.play(track_name)
   end
 
   it 'execute info track' do
