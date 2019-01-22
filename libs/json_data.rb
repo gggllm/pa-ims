@@ -1,4 +1,7 @@
 require 'yaml/store'
+
+# this class encapasulate Yaml:Store for easy use
+
 class JSONData
   def initialize file_name
     @store = YAML::Store.new("./storage/#{file_name}.yml")

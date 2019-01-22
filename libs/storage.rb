@@ -1,4 +1,7 @@
 require_relative './json_data'
+
+# this module offers tracks, artists and playlists as data
+
 module Storage
   @tracks = JSONData.new('tracks')
   @artists = JSONData.new('artists')

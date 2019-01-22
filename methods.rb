@@ -3,6 +3,8 @@ require_relative './Models/artist'
 require_relative './Models/play_list'
 require_relative './Models/track'
 
+# this module contains the methods for all business logic
+
 module Methods
   @tracks = Storage.tracks
   @artists = Storage.artists

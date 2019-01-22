@@ -5,6 +5,8 @@ loop do
   print"> "
   input = gets.chomp
   begin
+    # user a interpreter to handle input string for easy testing
+    # also return an array as result
     command, track, artist = CommandInterpreter.interpret input
   rescue
     puts "input command doesn't have the right arguments"
