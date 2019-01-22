@@ -21,7 +21,7 @@ module Methods
         index += 1
       end
     else
-      return
+      return "artist alread exists id is #{target.id}"
     end
     artist = Artist.new(name, id)
     artists << artist
@@ -32,7 +32,7 @@ module Methods
   def self.info
     list = (@play_lists.get :data) || []
     tracks = (@tracks.get :data) || []
-    artists = (@artists.get :Data) || []
+    artists = (@artists.get :data) || []
     output = []
     output << "three recently played music:"
     output << list.reverse.take(3)
