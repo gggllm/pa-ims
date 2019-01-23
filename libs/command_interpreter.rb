@@ -3,6 +3,7 @@ class CommandInterpreter
   #this method will return an array =[command, track, artist]
   def self.interpret input
     input = input.strip.lstrip.downcase
+    input=input.gsub /\s+/," "
     input_array = input.split(/\s+/)
     case input_array[0]
     when 'help'
