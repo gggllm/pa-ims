@@ -11,7 +11,7 @@ describe Methods do
   end
 
   it 'execute info track' do
-    Methods.info_track "something"
+    Methods.info_track 1
   end
 
   it 'execute info artist' do
